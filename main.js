@@ -1,4 +1,5 @@
 import App from './App'
+import '@/static/uni.webview.1.5.6.js'; 
 
 // #ifndef VUE3
 import Vue from 'vue'

@@ -1,19 +1,25 @@
 <template>
     <div class="page">
       <div class="main">
-        <div class="card" v-for="(item, index) in categories_out" :key="index">
-          <div class="card-item">
-            <div class="left">
-              <uni-icons fontFamily="iconfont-class" :size="18" color="rgb(99, 102, 241)">{{class_icons[item.fontIcon]}}</uni-icons>
-              <text class="card-label">{{ item.name }}</text>
+        <draggable v-model="categories" item-key="id" :animation="200" :fallbackTolerance="3" :touchStartThreshold="5"
+          :forceFallback="true" handle=".drag-list-item" class="drag-list">
+          <template #item="{ element }">
+            <div class="card drag-list-item"  @click="handleClick(element)">
+              <div class="card-item">
+                <div class="left">
+                  <uni-icons fontFamily="iconfont-class" :size="18" color="rgb(99, 102, 241)">{{class_icons[element.fontIcon]}}</uni-icons>
+                  <text class="card-label">{{ element.name }}</text>
+                </div>
+                
+                <div class="right">
+                  <uni-icons type="compose" size="20" color="#999999"></uni-icons>
+                  <uni-icons type="bars" size="20" color="#999999"></uni-icons>
+                </div>
+              </div>
             </div>
-            
-            <div class="right">
-              <uni-icons type="compose" size="20" color="#999999"></uni-icons>
-              <uni-icons type="bars" size="20" color="#999999"></uni-icons>
-            </div>
-          </div>
-        </div>
+          </template>
+        </draggable>
+        
 
         <div class="card">
           <div class="card-item">
@@ -53,9 +59,17 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import other_icons from '@/common/icon/other-icon'
 import class_icons from '@/common/icon/class-icon'
-import { categories_out, categories_in } from '@/common/icon/categories'
+import { categories_out } from '@/common/icon/categories'
+import draggable from 'vuedraggable'
+
+const categories = ref(categories_out)
+
+const handleClick = (item) => {
+  console.log('Clicked item:', item)
+}
 
 const goBack = () => {
   uni.navigateBack();
@@ -63,6 +77,32 @@ const goBack = () => {
 </script>
 
 <style lang="less" scoped>
+.drag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  touch-action: none;
+  /* 禁用默认触摸行为 */
+  overscroll-behavior-y: contain;
+  /* 阻止滚动链 */
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  cursor: move;
+  user-select: none;
+}
+
+.handle {
+  margin-right: 20rpx;
+  font-size: 24rpx;
+
+}
+
 .page {
   // background-color: #f5f5f5;
   min-height: 100%;

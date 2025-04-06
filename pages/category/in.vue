@@ -1,85 +1,164 @@
 <template>
-  <view class="container">
-    <draggable v-model="items" item-key="id" :animation="200" :fallbackTolerance="3" :touchStartThreshold="5"
-      :forceFallback="true" handle=".item" class="drag-list">
-      <template #item="{ element }">
-        <view class="item" @click="handleClick(element)">
-          <view class="handle">≡</view>
-          <text>{{ element.name }}</text>
-        </view>
-      </template>
-    </draggable>
-  </view>
+  <div class="page">
+    <div class="main">
+      <draggable v-model="categories" item-key="id" :animation="200" :fallbackTolerance="3" :touchStartThreshold="5"
+        :forceFallback="true" handle=".drag-list-item" class="drag-list">
+        <template #item="{ element }">
+          <div class="card drag-list-item"  @click="handleClick(element)">
+            <div class="card-item">
+              <div class="left">
+                <uni-icons fontFamily="iconfont-class" :size="18" color="rgb(99, 102, 241)">{{class_icons[element.fontIcon]}}</uni-icons>
+                <text class="card-label">{{ element.name }}</text>
+              </div>
+              
+              <div class="right">
+                <uni-icons type="compose" size="20" color="#999999"></uni-icons>
+                <uni-icons type="bars" size="20" color="#999999"></uni-icons>
+              </div>
+            </div>
+          </div>
+        </template>
+      </draggable>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="option-button">
+        <text class="button-text">保存</text>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
+import other_icons from '@/common/icon/other-icon'
+import class_icons from '@/common/icon/class-icon'
+import { categories_in } from '@/common/icon/categories'
 import draggable from 'vuedraggable'
 
+const categories = ref(categories_in)
+
 const handleClick = (item) => {
-  console.log('Clicked item:', item)
-  // 在这里处理点击事件，例如跳转到详情页等
-  uni.webView.postMessage({
-    data: {
-      action: 'itemClicked',
-      itemId: item.id
-    }
-  })
+console.log('Clicked item:', item)
 }
 
-document.addEventListener('UniAppJSBridgeReady', function() {
-        console.log(uni.webView,'lllll')
-        // uni.webView.getEnv(function(res) {
-        //   console.log('当前环境：' + JSON.stringify(res));
-        // });
-        // uni.webView.navigateTo(...)
-      });
-
-// document.addEventListener('UniAppJSBridgeReady', () => {
-//   console.log(uni,'=====')
-//   uni.webView.postMessage({ data: { msg: 'ready' } });
-// });
-
-const items = ref([
-  { id: 1, name: '苹果' },
-  { id: 2, name: '香蕉' },
-  { id: 3, name: '橙子' },
-  { id: 4, name: '西瓜' },
-  { id: 5, name: '葡萄' },
-  { id: 6, name: '芒果' },
-  { id: 7, name: '菠萝' },
-  { id: 8, name: '草莓' }
-])
+const goBack = () => {
+uni.navigateBack();
+};
 </script>
 
-<style>
-.container {
-  padding: 20rpx;
-}
-
+<style lang="less" scoped>
 .drag-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10rpx;
-  touch-action: none;
-  /* 禁用默认触摸行为 */
-  overscroll-behavior-y: contain;
-  /* 阻止滚动链 */
+display: flex;
+flex-direction: column;
+gap: 10rpx;
+touch-action: none;
+/* 禁用默认触摸行为 */
+overscroll-behavior-y: contain;
+/* 阻止滚动链 */
 }
 
 .item {
-  display: flex;
-  align-items: center;
-  padding: 20rpx;
-  background-color: #f5f5f5;
-  border-radius: 8rpx;
-  cursor: move;
-  user-select: none;
+display: flex;
+align-items: center;
+padding: 20rpx;
+background-color: #f5f5f5;
+border-radius: 8rpx;
+cursor: move;
+user-select: none;
 }
 
 .handle {
-  margin-right: 20rpx;
-  font-size: 24rpx;
+margin-right: 20rpx;
+font-size: 24rpx;
 
+}
+
+.page {
+// background-color: #f5f5f5;
+min-height: 100%;
+padding-bottom: 200rpx;
+box-sizing: border-box;
+}
+
+.main {
+padding: 32rpx;
+}
+
+.card {
+position: relative;
+background-color: #ffffff;
+border-radius: 30rpx;
+margin-bottom: 20rpx;
+box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 32rpx;
+}
+
+.left {
+display: flex;
+align-items: center;
+gap: 20rpx;
+}
+
+.border-bottom {
+border-bottom: 1px solid #f0f0f0;
+}
+
+.card-label {
+font-size: 14px;
+color: #333333;
+}
+
+.right {
+display: flex;
+align-items: center;
+gap: 20rpx;
+}
+
+.value-text {
+font-size: 14px;
+color: #666666;
+margin-right: 16rpx;
+}
+
+.placeholder-text {
+font-size: 14px;
+color: #999999;
+margin-right: 16rpx;
+}
+
+.switch {
+transform: scale(0.8);
+}
+
+.bottom-bar {
+position: fixed;
+left: 0;
+right: 0;
+bottom: 0rpx;
+padding: 32rpx;
+background-color: #ffffff;
+border-top: 1px solid #f0f0f0;
+}
+
+.option-button {
+width: 100%;
+height: 88rpx;
+background-color: rgb(99, 102, 241);
+border-radius: 88rpx;
+color: #ffffff;
+font-size: 14px;
+font-weight: 500;
+display: flex;
+align-items: center;
+justify-content: center;
+border: none;
+margin-bottom: 20rpx;
 }
 </style>

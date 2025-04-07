@@ -15,25 +15,20 @@
 		{
 			"path": "pages/category/in",
 			"style": {
-				"navigationBarTitleText": "收入分类",
-				"app-plus": {
-					"titleNView": {
-						"buttons": [
-							{
-								"type": "menu",
-								"float": "right",
-								"fontSize": "30px"
-							}
-						]
-					}
-				}
+				"navigationBarTitleText": "收入分类"
+			}
+		},
+		{
+			"path": "pages/tags/sort",
+			"style": {
+				"navigationBarTitleText": "标签排序"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "加载中……",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

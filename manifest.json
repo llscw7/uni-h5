@@ -1,5 +1,5 @@
 {
-    "name" : "uni-h5",
+    "name" : "h5",
     "appid" : "__UNI__B824EB0",
     "description" : "",
     "versionName" : "1.0.0",
@@ -68,5 +68,13 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "h5" : {
+        "unipush" : {
+            "enable" : true
+        },
+        "router" : {
+            "base" : "/h5/"
+        }
+    }
 }

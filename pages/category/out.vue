@@ -12,42 +12,12 @@
                 </div>
                 
                 <div class="right">
-                  <uni-icons type="compose" size="20" color="#999999"></uni-icons>
                   <uni-icons type="bars" size="20" color="#999999"></uni-icons>
                 </div>
               </div>
             </div>
           </template>
         </draggable>
-        
-
-        <div class="card">
-          <div class="card-item">
-            <text class="card-label">指定账户</text>
-            <div class="right">
-              <text class="placeholder-text">点此选择 (可不选)</text>
-              <uni-icons type="right" size="16" color="#d1d5db" />
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card">
-          <div class="card-item">
-            <text class="card-label">指定账本</text>
-            <div class="right">
-              <text class="placeholder-text">点此选择 (可不选)</text>
-              <uni-icons type="right" size="16" color="#d1d5db" />
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-item">
-            <text class="card-label">包含图片附件或链接</text>
-            <switch class="switch" color="rgb(99, 102, 241)" :checked="false" />
-          </div>
-        </div>
       </div>
 
       <div class="bottom-bar">

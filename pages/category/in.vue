@@ -12,7 +12,6 @@
               </div>
               
               <div class="right">
-                <uni-icons type="compose" size="20" color="#999999"></uni-icons>
                 <uni-icons type="bars" size="20" color="#999999"></uni-icons>
               </div>
             </div>

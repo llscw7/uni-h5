@@ -30,12 +30,27 @@ export default {
 			openSmooth: true
 		}
 	},
-	onLoad() {
+	async onLoad() {
 		// 获取当前时间
 		const currentTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
 		// 设置标题
 		this.title = `当前时间: ${currentTime}`
 		console.log(currentTime, '======')
+
+		const res = await uniCloud.callFunction({
+			name: 'demo',
+			data: {
+				chat: [], // 传入消息数组
+			}
+		})
+		if(res?.result?.errCode === 0) {
+		}else {
+			uni.showToast({
+			title: res.result.message ?? '网络异常',
+			icon: 'none'
+			})
+		}
+		console.log('云函数返回', res);
 	},
 	methods: {
 		onClick(type) {

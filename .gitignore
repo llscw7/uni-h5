@@ -22,3 +22,5 @@ dist
 *.sw?
 
 src/user.ts
+
+uniCloud-aliyun
